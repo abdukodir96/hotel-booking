@@ -40,13 +40,22 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname !== "/") {
+      setIsScrolled(true);
+      return;
+    } else {
+      setIsScrolled(false);
+    }
+
+    setIsScrolled((prev) => (location.pathname !== "/" ? true : prev));
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <nav
@@ -87,13 +96,16 @@ const Navbar = () => {
           </Link>
         ))}
 
-        <button
-          className={`border px-4 py-1 text-sm font-light rounded-full transition-all ${
-            isScrolled ? "text-black border-black" : "text-white border-white"
-          }`}
-        >
-          Dashboard
-        </button>
+        {user && (
+          <button
+            onClick={() => navigate("/owner")}
+            className={`border px-4 py-1 text-sm font-light rounded-full transition-all ${
+              isScrolled ? "text-black border-black" : "text-white border-white"
+            }`}
+          >
+            Dashboard
+          </button>
+        )}
       </div>
 
       {/* Desktop Right */}
@@ -125,12 +137,25 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden flex items-center">
+
+      <div className="flex items-center gap-3 md:hidden">
+        {user && (
+          <UserButton>
+            <UserButton.MenuItems>
+              <UserButton.Action
+                label="My Bookings"
+                labelIcon={<BookIcon />}
+                onClick={() => navigate("/my-bookings")}
+              />
+            </UserButton.MenuItems>
+          </UserButton>
+        )}
+
         <img
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
           src={assets.menuIcon}
-          alt="menu"
-          onClick={() => setIsMenuOpen(true)}
-          className={`h-5 cursor-pointer ${isScrolled ? "invert" : ""}`}
+          alt=""
+          className={`${isScrolled && "invert"} h-4`}
         />
       </div>
 
@@ -152,15 +177,20 @@ const Navbar = () => {
           </Link>
         ))}
 
-        <button className="border px-4 py-1 text-sm font-light rounded-full">
-          Dashboard
-        </button>
+        {user && (
+          <button
+            onClick={() => navigate("/owner")}
+            className="border px-4 py-1 text-sm font-light rounded-full"
+          >
+            Dashboard
+          </button>
+        )}
 
         {user ? (
           <UserButton />
         ) : (
           <button
-            onClick={() => openSignIn()}
+            onClick={openSignIn}
             className="bg-black text-white px-8 py-2.5 rounded-full"
           >
             Login
