@@ -119,8 +119,8 @@ export const exclusiveOffers = [
 export const testimonials = [
   {
     id: 1,
-    name: "Emma Rodriguez",
-    address: "Barcelona, Spain",
+    name: "Leo",
+    address: "Londan, The UK",
     image:
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
     rating: 5,
@@ -129,7 +129,7 @@ export const testimonials = [
   },
   {
     id: 2,
-    name: "Liam Johnson",
+    name: "Martin",
     address: "New York, USA",
     image:
       "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
@@ -140,15 +140,34 @@ export const testimonials = [
   {
     id: 3,
     name: "Sophia Lee",
-    address: "Seoul, South Korea",
+    address: "Taipei, Taiwan",
     image:
       "https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=200",
     rating: 5,
     review:
       "Amazing service! I always find the best luxury accommodations through QuickStay. Their recommendations never disappoint!",
   },
+  {
+    id: 4,
+    name: "Tina Lee",
+    address: "Seoul, South Korea",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
+    rating: 5,
+    review:
+      "Amazing service! I always find the best luxury accommodations through QuickStay. Their provide more than I expected!",
+  },
+  {
+    id: 5,
+    name: "Neo",
+    address: "Berlin, Germany",
+    image:
+      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&auto=format&fit=crop&q=60",
+    rating: 4.5,
+    review:
+      "Amazing service! I always find the best luxury accommodations through QuickStay. Their provide more than I expected!",
+  },
 ];
-
 // Facility Icon
 export const facilityIcons = {
   "Free WiFi": assets.freeWifiIcon,
@@ -193,17 +212,17 @@ export const userDummyData = {
   createdAt: "2025-03-25T09:29:16.367Z",
   updatedAt: "2025-04-10T06:34:48.719Z",
   __v: 1,
-  recentSearchedCities: ["New York"],
+  recentSearchedCities: ["BUSAN"],
 };
 
 // Hotel Dummy Data
 export const hotelDummyData = {
   _id: "67f76393197ac559e4089b72",
-  name: "Urbanza Suites",
-  address: "Main Road  123 Street , 23 Colony",
+  name: "Marine City",
+  address: "Busan 51, 1-ro, Haeundae-gu, 48120",
   contact: "+0123456789",
   owner: userDummyData,
-  city: "New York",
+  city: "BUSAN",
   createdAt: "2025-04-10T06:22:11.663Z",
   updatedAt: "2025-04-10T06:22:11.663Z",
   __v: 0,
