@@ -46,9 +46,14 @@ const HotelCard = ({ room, index }) => {
         />
 
         {index % 2 === 0 && (
-          <p className="px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full z-10">
-            Best Seller
-          </p>
+          <div
+            className="flex items-center gap-1 px-3 py-1 absolute top-3 left-3
+               text-xs bg-white text-gray-800 font-medium
+               rounded-full shadow-sm z-10"
+          >
+            <span>⭐</span>
+            <span>Top Rated</span>
+          </div>
         )}
       </div>
 
@@ -60,7 +65,7 @@ const HotelCard = ({ room, index }) => {
           </p>
           <div className="flex items-center gap-1 text-sm text-gray-700">
             <img src={assets.starIconFilled} alt="star-icon" className="h-4" />
-            <span>4.5</span>
+            <span>5</span>
           </div>
         </div>
 
@@ -79,7 +84,7 @@ const HotelCard = ({ room, index }) => {
 
           <button
             type="button"
-            className="px-4 py-2 text-sm font-medium border border-gray-300 rounded hover:bg-gray-50 transition-all"
+            className="px-4 py-2 text-sm font-medium border border-gray-300 rounded hover:bg-gray-200 transition-all cursor-pointer"
           >
             Book Now
           </button>

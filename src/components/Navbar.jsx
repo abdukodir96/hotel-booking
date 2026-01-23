@@ -34,7 +34,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSignIn } = useClerk();
+  const { openSignIn, signOut } = useClerk(); // ✅ signOut qo‘shildi
   const { user } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
@@ -124,6 +124,14 @@ const Navbar = () => {
                 labelIcon={<BookIcon />}
                 onClick={() => navigate("/my-bookings")}
               />
+              <UserButton.Action
+                label="Sign out"
+                onClick={() => {
+                  localStorage.setItem("justSignedOut", "1");
+                  localStorage.removeItem("qs_auth_state"); // ✅ refreshda login toast chiqmasin
+                  signOut();
+                }}
+              />
             </UserButton.MenuItems>
           </UserButton>
         ) : (
@@ -137,7 +145,6 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Button */}
-
       <div className="flex items-center gap-3 md:hidden">
         {user && (
           <UserButton>
@@ -146,6 +153,14 @@ const Navbar = () => {
                 label="My Bookings"
                 labelIcon={<BookIcon />}
                 onClick={() => navigate("/my-bookings")}
+              />
+              <UserButton.Action
+                label="Sign out"
+                onClick={() => {
+                  localStorage.setItem("justSignedOut", "1");
+                  localStorage.removeItem("qs_auth_state"); // ✅ refreshda login toast chiqmasin
+                  signOut();
+                }}
               />
             </UserButton.MenuItems>
           </UserButton>
