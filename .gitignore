@@ -1,4 +1,6 @@
+####################################
 # Logs
+####################################
 logs
 *.log
 npm-debug.log*
@@ -7,19 +9,59 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+####################################
+# Runtime data
+####################################
+pids
+*.pid
+*.seed
+*.pid.lock
+
+####################################
+# Dependency directories
+####################################
+node_modules/
+
+####################################
+# Build outputs
+####################################
+dist/
+dist-ssr/
+build/
+out/
+
+####################################
+# Environment variables (SECRETS)
+####################################
+.env
+.env.*
+!.env.example
+
+####################################
+# Local config files
+####################################
 *.local
 
-# Editor directories and files
+####################################
+# Editor / IDE files
+####################################
 .vscode/*
 !.vscode/extensions.json
-.env
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+
+####################################
+# OS generated files
+####################################
+.DS_Store
+Thumbs.db
+
+####################################
+# Cache / temp
+####################################
+.cache/
+.tmp/
+.temp/
