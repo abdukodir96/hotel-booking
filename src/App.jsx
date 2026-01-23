@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import AuthToasts from "./components/AuthToasts";
+import AllRooms from "./pages/AllRooms";
 
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("owner");
@@ -31,6 +32,7 @@ const App = () => {
       <div className="min-h-[70vh]">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/rooms" element={<AllRooms />} />
         </Routes>
       </div>
 
