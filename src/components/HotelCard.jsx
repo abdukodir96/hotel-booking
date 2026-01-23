@@ -11,15 +11,25 @@ const HotelCard = ({ room, index }) => {
     <Link
       to={`/rooms/${room._id}`}
       onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-      className="relative max-w-70 w-full rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-[0px_4px_4px_rgba(0,0,0,0.05)]"
+      className="
+        relative max-w-70 w-full rounded-xl overflow-hidden
+        bg-white text-gray-500/90
+        shadow-[0px_4px_4px_rgba(0,0,0,0.05)]
+        transition-all duration-300 ease-out
+        hover:-translate-y-1 hover:shadow-xl
+      "
     >
       {/* Image wrapper */}
-      <div>
+      <div className="group relative overflow-hidden">
         {imageSrc ? (
           <img
             src={imageSrc}
             alt={hotelName}
-            className="w-full h-48 object-cover"
+            className="
+              w-full h-48 object-cover
+              transition-all duration-300 ease-out
+              group-hover:scale-105
+            "
           />
         ) : (
           <div className="w-full h-48 bg-gray-100 flex items-center justify-center text-sm text-gray-400">
@@ -27,8 +37,16 @@ const HotelCard = ({ room, index }) => {
           </div>
         )}
 
+        {/* image overlay */}
+        <div
+          className="
+            absolute inset-0 bg-black/10 opacity-0
+            group-hover:opacity-100 transition-opacity duration-300
+          "
+        />
+
         {index % 2 === 0 && (
-          <p className="px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full">
+          <p className="px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full z-10">
             Best Seller
           </p>
         )}
