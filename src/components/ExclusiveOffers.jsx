@@ -12,12 +12,23 @@ const ExclusiveOffers = () => {
           subTitle="Unlock limited-time deals and carefully crafted packages designed to elevate your stay and create lasting memories."
         />
 
-        <button className="group flex items-center gap-2 font-medium cursor-pointer max-md:mt-12">
-          View All Offers
+        <button className="group flex items-center gap-2 font-medium cursor-pointer max-md:mt-12 relative">
+          <span className="relative">
+            View All Offers
+            <span
+              className="
+        absolute left-0 -bottom-1 h-0.5 w-0
+        bg-black
+        transition-all duration-300
+        group-hover:w-full
+      "
+            />
+          </span>
+
           <img
             src={assets.arrowIcon}
             alt="arrow-icon"
-            className="transition-transform group-hover:translate-x-1"
+            className="transition-transform duration-300 group-hover:translate-x-1.5"
           />
         </button>
       </div>

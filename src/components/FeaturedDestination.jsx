@@ -24,9 +24,18 @@ const FeaturedDestination = () => {
           navigate("/rooms");
           scrollTo(0, 0);
         }}
-        className="my-16 px-4 py-2 text-sm font-medium border border-gray-300 rounded bg-white hover:border-r-gray-50 transition-all cursor-pointer"
+        className="
+    my-16 px-6 py-2 text-sm font-medium
+    border border-gray-300 rounded
+    bg-white text-gray-800
+    transition-all duration-300 ease-out
+    hover:border-gray-900
+    hover:shadow-md
+    hover:-translate-y-0.5
+    cursor-pointer
+  "
       >
-        View All Destinantions
+        View All Destinations
       </button>
     </div>
   );
