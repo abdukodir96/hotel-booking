@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { assets, facilityIcons, roomsDummyData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 
-const StarRatting = () => (
+const StarRating = () => (
   <>
     {Array.from({ length: 5 }).map((_, i) => (
       <span key={i}>⭐</span>
@@ -87,7 +87,7 @@ const AllRooms = () => {
                 {room.hotel.name}
               </p>
               <div className="flex items-center">
-                <StarRatting />
+                <StarRating />
                 <p className="ml-2">200+ reviews</p>
               </div>
               <div className="flex items-center gap-1 text-gray-500 mt-2 text-sm">

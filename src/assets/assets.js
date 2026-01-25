@@ -168,6 +168,7 @@ export const testimonials = [
       "Amazing service! I always find the best luxury accommodations through QuickStay. Their provide more than I expected!",
   },
 ];
+
 // Facility Icon
 export const facilityIcons = {
   "Free WiFi": assets.freeWifiIcon,
@@ -204,10 +205,11 @@ export const roomCommonData = [
 // User Dummy Data
 export const userDummyData = {
   _id: "user_2unqyL4diJFP1E3pIBnasc7w8hP",
-  username: "Great Stack",
-  email: "user.greatstack@gmail.com",
-  image:
-    "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ2N2c5YVpSSEFVYVUxbmVYZ2JkSVVuWnFzWSJ9",
+  username: "Abdukodir",
+  email: "abdukodirsheraliev1@gmail.com",
+
+  image: "/host.png",
+
   role: "hotelOwner",
   createdAt: "2025-03-25T09:29:16.367Z",
   updatedAt: "2025-04-10T06:34:48.719Z",
@@ -341,10 +343,9 @@ export const dashboardDummyData = {
 
 // --------- SVG code for Book Icon------
 /* 
-const BookIcon = ()=>(
-    <svg className="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
+const BookIcon = () => (
+  <svg className="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
-</svg>
+  </svg>
 )
-
 */
