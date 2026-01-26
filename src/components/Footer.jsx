@@ -40,18 +40,22 @@ const Footer = () => {
             <img
               src={assets.instagramIcon}
               alt="instargram-icon"
-              className="w-6"
+              className="w-6 cursor-pointer transition-all duration-200 ease-out opacity-80 hover:opacity-100 hover:scale-110 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 rounded"
             />
             <img
               src={assets.facebookIcon}
               alt="facebook-icon"
-              className="w-6"
+              className="w-6 cursor-pointer transition-all duration-200 ease-out opacity-80 hover:opacity-100 hover:scale-110 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 rounded"
             />
-            <img src={assets.twitterIcon} alt="twitter-icon" className="w-6" />
+            <img
+              src={assets.twitterIcon}
+              alt="twitter-icon"
+              className="w-6 cursor-pointer transition-all duration-200 ease-out opacity-80 hover:opacity-100 hover:scale-110 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 rounded"
+            />
             <img
               src={assets.linkendinIcon}
               alt="linkend-icon"
-              className="w-6"
+              className="w-6 cursor-pointer transition-all duration-200 ease-out opacity-80 hover:opacity-100 hover:scale-110 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 rounded"
             />
           </div>
         </div>
@@ -60,19 +64,44 @@ const Footer = () => {
           <p className="font-playfair text-lg text-gray-800">COMPANY</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             <li>
-              <a href="#">About</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                About
+              </a>
             </li>
             <li>
-              <a href="#">Careers</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Careers
+              </a>
             </li>
             <li>
-              <a href="#">Press</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Press
+              </a>
             </li>
             <li>
-              <a href="#">Blog</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Blog
+              </a>
             </li>
             <li>
-              <a href="#">Partners</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Partners
+              </a>
             </li>
           </ul>
         </div>
@@ -81,19 +110,44 @@ const Footer = () => {
           <p className="font-playfair text-lg text-gray-800">SUPPORT</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             <li>
-              <a href="#">Help Center</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Help Center
+              </a>
             </li>
             <li>
-              <a href="#">Safety Information</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Safety Information
+              </a>
             </li>
             <li>
-              <a href="#">Cancellation Options</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Cancellation Options
+              </a>
             </li>
             <li>
-              <a href="#">Contact Us</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Contact Us
+              </a>
             </li>
             <li>
-              <a href="#">Accessibility</a>
+              <a
+                href="#"
+                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+              >
+                Accessibility
+              </a>
             </li>
           </ul>
         </div>
@@ -135,13 +189,28 @@ const Footer = () => {
         <p>© {new Date().getFullYear()} QuickStay. All rights reserved.</p>
         <ul className="flex items-center gap-4">
           <li>
-            <a href="#">Privacy</a>
+            <a
+              href="#"
+              className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+            >
+              Privacy
+            </a>
           </li>
           <li>
-            <a href="#">Terms</a>
+            <a
+              href="#"
+              className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+            >
+              Terms
+            </a>
           </li>
           <li>
-            <a href="#">Sitemap</a>
+            <a
+              href="#"
+              className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
+            >
+              Sitemap
+            </a>
           </li>
         </ul>
       </div>
