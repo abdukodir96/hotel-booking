@@ -79,7 +79,7 @@ const Testimonial = () => {
           {items.map((testimonial, index) => (
             <div
               key={`${testimonial.id}-${index}`}
-              className="bg-white p-6 rounded-xl shadow max-w-xs shrink-0"
+              className="bg-white p-6 rounded-xl shadow max-w-xs shrink-0 transition-transform duration-300 hover:scale-105"
             >
               <div className="flex items-center gap-3">
                 <img
