@@ -76,7 +76,7 @@ const AddRoom = () => {
             "Pool Access": false,
           },
         });
-        setImages({ 1: null, 2: null, 3: null, 4: null, 5: null });
+        setImages({ 1: null, 2: null, 3: null, 4: null });
       } else {
         toast.error(data.message);
       }
