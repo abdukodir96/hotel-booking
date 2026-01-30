@@ -37,11 +37,21 @@ export const AppProvider = ({ children }) => {
       const { data } = await axios.get("/api/user", {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
+
       if (data.success) {
         setIsOwner(data.role === "hotelOwner");
-        setSearchedCities(data.recentSearchedCities);
+
+        // serverdan bo'sh [] kelsa ham, client state'ni bosib yubormaymiz
+        setSearchedCities((prev) => {
+          const serverCities = data.recentSearchedCities;
+
+          if (!Array.isArray(serverCities) || serverCities.length === 0) {
+            return prev;
+          }
+
+          return serverCities;
+        });
       } else {
-        // Retry Fetching User Details after 5 seconds
         setTimeout(() => {
           fetchUser();
         }, 5000);
@@ -75,6 +85,7 @@ export const AppProvider = ({ children }) => {
     setSearchedCities,
     rooms,
     setRooms,
+    fetchUser,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

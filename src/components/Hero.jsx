@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
 
 const Hero = () => {
+  const { getToken, axios, setSearchedCities, fetchUser } = useAppContext();
+  const [destination, setDestination] = useState("");
+
+  const onSearch = async (e) => {
+    e.preventDefault();
+
+    const cleanedDestination = destination.trim();
+    if (!cleanedDestination) return;
+
+    // 1) UI darhol yangilansin (Home ichida RecommendedHotels chiqadi)
+    setSearchedCities((prevSearchedCities) => {
+      const updatedSearchedCities = [...prevSearchedCities, cleanedDestination];
+      if (updatedSearchedCities.length > 3) {
+        updatedSearchedCities.shift();
+      }
+      return updatedSearchedCities;
+    });
+
+    // 2) Serverga yozish (xato bo'lsa ham UI ishlayversin)
+    try {
+      await axios.post(
+        "/api/user/store-recent-search",
+        { recentSearchedCity: cleanedDestination },
+        { headers: { Authorization: `Bearer ${await getToken()}` } },
+      );
+
+      // 3) Server bilan sync (ixtiyoriy)
+      if (fetchUser) {
+        await fetchUser();
+      }
+    } catch (err) {
+      console.log("store recent search failed:", err);
+    }
+  };
+
   return (
     <div className='flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-[url("/src/assets/heroImage.png")] bg-no-repeat bg-cover bg-center h-screen'>
       <p className="bg-[#49B9FF]/50 px-3.5 py-1 rounded-full mt-20">
@@ -15,7 +51,10 @@ const Hero = () => {
         one place.
       </p>
 
-      <form className="bg-white text-gray-500 rounded-lg px-6 py-4 mt-8 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto">
+      <form
+        onSubmit={onSearch}
+        className="bg-white text-gray-500 rounded-lg px-6 py-4 mt-8 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto"
+      >
         <div>
           <div className="flex items-center gap-2">
             <img
@@ -26,10 +65,12 @@ const Hero = () => {
             <label htmlFor="destinationInput">Destination</label>
           </div>
           <input
+            onChange={(e) => setDestination(e.target.value)}
+            value={destination}
             list="destinations"
             id="destinationInput"
             type="text"
-            className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
+            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
             placeholder="Type here"
             required
           />
@@ -52,7 +93,7 @@ const Hero = () => {
           <input
             id="checkIn"
             type="date"
-            className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
+            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
           />
         </div>
 
@@ -68,7 +109,7 @@ const Hero = () => {
           <input
             id="checkOut"
             type="date"
-            className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
+            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
           />
         </div>
 
@@ -79,12 +120,15 @@ const Hero = () => {
             max={4}
             id="guests"
             type="number"
-            className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none  max-w-16"
+            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none max-w-16"
             placeholder="0"
           />
         </div>
 
-        <button className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1">
+        <button
+          type="submit"
+          className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1"
+        >
           <img src={assets.searchIcon} alt="search-icon" className="h-7" />
           <span>Search</span>
         </button>
