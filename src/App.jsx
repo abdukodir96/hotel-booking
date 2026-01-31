@@ -23,6 +23,7 @@ import ListRoom from "./pages/hotelOwner/ListRoom";
 
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
+import Loader from "./components/Loader";
 
 const App = () => {
   const location = useLocation();
@@ -65,6 +66,7 @@ const App = () => {
           {/* ✅ YANGI ROUTES */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
+          <Route path="/loader/:nextUrl" element={<Loader />} />
 
           {/* Hotel Owner Panel */}
           <Route path="/owner" element={<Layout />}>
