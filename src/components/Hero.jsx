@@ -3,7 +3,8 @@ import { assets, cities } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
 const Hero = () => {
-  const { getToken, axios, setSearchedCities, fetchUser } = useAppContext();
+  const { getToken, axios, setSearchedCities, fetchUser, navigate } =
+    useAppContext();
   const [destination, setDestination] = useState("");
 
   const onSearch = async (e) => {
@@ -12,7 +13,7 @@ const Hero = () => {
     const cleanedDestination = destination.trim();
     if (!cleanedDestination) return;
 
-    // 1) UI darhol yangilansin (Home ichida RecommendedHotels chiqadi)
+    // 1) UI darhol yangilansin (Home ichida RecommendedHotels ham ishlaydi)
     setSearchedCities((prevSearchedCities) => {
       const updatedSearchedCities = [...prevSearchedCities, cleanedDestination];
       if (updatedSearchedCities.length > 3) {
@@ -21,7 +22,11 @@ const Hero = () => {
       return updatedSearchedCities;
     });
 
-    // 2) Serverga yozish (xato bo'lsa ham UI ishlayversin)
+    // 2) /rooms sahifasiga o'tish (destination query bilan)
+    navigate(`/rooms?destination=${encodeURIComponent(cleanedDestination)}`);
+    scrollTo(0, 0);
+
+    // 3) Serverga yozish (xato bo'lsa ham UI ishlayversin)
     try {
       await axios.post(
         "/api/user/store-recent-search",
@@ -29,7 +34,7 @@ const Hero = () => {
         { headers: { Authorization: `Bearer ${await getToken()}` } },
       );
 
-      // 3) Server bilan sync (ixtiyoriy)
+      // 4) Server bilan sync (ixtiyoriy)
       if (fetchUser) {
         await fetchUser();
       }

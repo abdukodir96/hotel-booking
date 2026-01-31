@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
-import { assets, facilityIcons, roomsDummyData } from "../assets/assets";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { assets, facilityIcons } from "../assets/assets";
+import { useSearchParams } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
 const StarRating = () => (
@@ -63,7 +63,11 @@ const AllRooms = () => {
     "Newest First",
   ];
 
-  // Handle changes for filters and sorting
+  const normalize = (v) =>
+    String(v ?? "")
+      .trim()
+      .toLowerCase();
+
   const handleFilterChange = (checked, value, type) => {
     setSelectedFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters };
@@ -78,12 +82,10 @@ const AllRooms = () => {
     });
   };
 
-  // Handle changes for sorting
   const handleSortChange = (option) => {
     setSelectedSort(option);
   };
 
-  // Function to check if a room matches the selected room types
   const matchesRoomType = (room) => {
     return (
       selectedFilters.roomType.length === 0 ||
@@ -91,7 +93,6 @@ const AllRooms = () => {
     );
   };
 
-  // Function to check if a room matches the selected price ranges
   const matchesPriceRange = (room) => {
     return (
       selectedFilters.priceRange.length === 0 ||
@@ -102,28 +103,25 @@ const AllRooms = () => {
     );
   };
 
-  // Function to sort rooms based on the selected sort option
   const sortRooms = (a, b) => {
-    if (selectedSort === "Price Low to High") {
+    if (selectedSort === "Price Low to High")
       return a.pricePerNight - b.pricePerNight;
-    }
-    if (selectedSort === "Price High to Low") {
+    if (selectedSort === "Price High to Low")
       return b.pricePerNight - a.pricePerNight;
-    }
-    if (selectedSort === "Newest First") {
+    if (selectedSort === "Newest First")
       return new Date(b.createdAt) - new Date(a.createdAt);
-    }
     return 0;
   };
 
-  // Filter Destination
+  // ✅ Destination filter (query: destination)
   const filterDestination = (room) => {
     const destination = searchParams.get("destination");
     if (!destination) return true;
-    return room.hotel.city.toLowerCase().includes(destination.toLowerCase());
+
+    // aniq match
+    return normalize(room?.hotel?.city) === normalize(destination);
   };
 
-  // Filter and sort rooms based on the selected filters and sort option
   const filteredRooms = useMemo(() => {
     return rooms
       .filter(
@@ -135,14 +133,10 @@ const AllRooms = () => {
       .sort(sortRooms);
   }, [rooms, selectedFilters, selectedSort, searchParams]);
 
-  // Clear all filters
   const clearFilters = () => {
-    setSelectedFilters({
-      roomType: [],
-      priceRange: [],
-    });
+    setSelectedFilters({ roomType: [], priceRange: [] });
     setSelectedSort("");
-    setSearchParams({});
+    setSearchParams({}); // destination ham o'chadi
   };
 
   return (
@@ -190,7 +184,7 @@ const AllRooms = () => {
                 <img src={assets.locationIcon} alt="location-icon" />
                 <span>{room.hotel.address}</span>
               </div>
-              {/* Room Amenities */}
+
               <div className="flex items-center mt-3 mb-6 gap-4 ">
                 {room.amenities.map((item, index) => (
                   <div
@@ -206,7 +200,7 @@ const AllRooms = () => {
                   </div>
                 ))}
               </div>
-              {/* Room Price per Night */}
+
               <p className="text-xl font-medium text-gray-700">
                 {currency}
                 {room.pricePerNight} /night
@@ -217,10 +211,7 @@ const AllRooms = () => {
       </div>
 
       {/* Filters */}
-      <div
-        className="bg-white w-80 border border-gray-300 text-gray-600 max-lg:mb-8 lg:mt-16 lg:sticky lg:top-24 self-start
-  transition-all duration-300 hover:shadow-xl rounded-xl"
-      >
+      <div className="bg-white w-80 border border-gray-300 text-gray-600 max-lg:mb-8 lg:mt-16 lg:sticky lg:top-24 self-start transition-all duration-300 hover:shadow-xl rounded-xl">
         <div
           className={`flex items-center justify-between px-5 py-2.5 lg:border-b border-gray-300 ${
             openFilters && "border-b"
@@ -245,9 +236,7 @@ const AllRooms = () => {
         </div>
 
         <div
-          className={`${
-            openFilters ? "h-auto" : "h-0 lg:h-auto"
-          } overflow-hidden transition-all duration-700`}
+          className={`${openFilters ? "h-auto" : "h-0 lg:h-auto"} overflow-hidden transition-all duration-700`}
         >
           <div className="px-5 pt-5">
             <p className="font-medium text-gray-800 pb-2">Popular filters</p>
@@ -262,6 +251,7 @@ const AllRooms = () => {
               />
             ))}
           </div>
+
           <div className="px-5 pt-5">
             <p className="font-medium text-gray-800 pb-2">Price Range</p>
             {priceRanges.map((range, index) => (
@@ -275,6 +265,7 @@ const AllRooms = () => {
               />
             ))}
           </div>
+
           <div className="px-5 pt-5 pb-7">
             <p className="font-medium text-gray-800 pb-2">Sort By</p>
             {sortOptions.map((option, index) => (
