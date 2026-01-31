@@ -25,21 +25,23 @@ const BookIcon = () => (
 );
 
 const Navbar = () => {
+  // ✅ PATH’lar to‘g‘rilandi
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Hotels", path: "/rooms" },
-    { name: "Experience", path: "/" },
-    { name: "About", path: "/" },
+    { name: "Experience", path: "/" }, // keyin alohida page bo‘lsa o‘zgartirasiz
+    { name: "About", path: "/about" }, // ✅ endi navbar ham about’ga olib boradi
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSignIn, signOut } = useClerk(); // ✅ signOut qo‘shildi
+  const { openSignIn, signOut } = useClerk();
   const location = useLocation();
   const { user, navigate, isOwner, setShowHotelReg } = useAppContext();
 
   useEffect(() => {
+    // Home emas bo‘lsa navbar “scrolled” holatda tursin
     if (location.pathname !== "/") {
       setIsScrolled(true);
       return;
@@ -47,15 +49,13 @@ const Navbar = () => {
       setIsScrolled(false);
     }
 
-    setIsScrolled((prev) => (location.pathname !== "/" ? true : prev));
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
+
+  const goTop = () => window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
   return (
     <nav
@@ -67,7 +67,7 @@ const Navbar = () => {
         }`}
     >
       {/* Logo */}
-      <Link to="/">
+      <Link to="/" onClick={goTop}>
         <img
           src={assets.logo}
           alt="logo"
@@ -83,6 +83,7 @@ const Navbar = () => {
           <Link
             key={i}
             to={link.path}
+            onClick={goTop}
             className={`group flex flex-col gap-0.5 ${
               isScrolled ? "text-gray-700" : "text-white"
             }`}
@@ -124,13 +125,16 @@ const Navbar = () => {
               <UserButton.Action
                 label="My Bookings"
                 labelIcon={<BookIcon />}
-                onClick={() => navigate("/my-bookings")}
+                onClick={() => {
+                  navigate("/my-bookings");
+                  goTop();
+                }}
               />
               <UserButton.Action
                 label="Sign out"
                 onClick={() => {
                   localStorage.setItem("justSignedOut", "1");
-                  localStorage.removeItem("qs_auth_state"); // ✅ refreshda login toast chiqmasin
+                  localStorage.removeItem("qs_auth_state");
                   signOut();
                 }}
               />
@@ -154,13 +158,16 @@ const Navbar = () => {
               <UserButton.Action
                 label="My Bookings"
                 labelIcon={<BookIcon />}
-                onClick={() => navigate("/my-bookings")}
+                onClick={() => {
+                  navigate("/my-bookings");
+                  goTop();
+                }}
               />
               <UserButton.Action
                 label="Sign out"
                 onClick={() => {
                   localStorage.setItem("justSignedOut", "1");
-                  localStorage.removeItem("qs_auth_state"); // ✅ refreshda login toast chiqmasin
+                  localStorage.removeItem("qs_auth_state");
                   signOut();
                 }}
               />
@@ -171,7 +178,7 @@ const Navbar = () => {
         <img
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           src={assets.menuIcon}
-          alt=""
+          alt="menu"
           className={`${isScrolled && "invert"} h-4`}
         />
       </div>
@@ -189,7 +196,14 @@ const Navbar = () => {
         </button>
 
         {navLinks.map((link, i) => (
-          <Link key={i} to={link.path} onClick={() => setIsMenuOpen(false)}>
+          <Link
+            key={i}
+            to={link.path}
+            onClick={() => {
+              setIsMenuOpen(false);
+              goTop();
+            }}
+          >
             {link.name}
           </Link>
         ))}

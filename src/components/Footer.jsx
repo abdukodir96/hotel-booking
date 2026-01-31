@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import FooterBlog from "./footer/FooterBlog";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -22,15 +24,20 @@ const Footer = () => {
     setEmail("");
   };
 
+  const linkClass =
+    "transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded";
+
   return (
-    <div className="bg-[#F6F9FC] text-gray-500/80 pt-8 px-6 md:px-16 lg:px-24 xl:px-32">
+    <footer className="bg-[#F6F9FC] text-gray-500/80 pt-8 px-6 md:px-16 lg:px-24 xl:px-32">
       <div className="flex flex-wrap justify-between gap-12 md:gap-6">
+        {/* Left: Logo + text + socials */}
         <div className="max-w-80">
           <img
             src={assets.logo}
             alt="logo"
             className="mb-4 h-8 md:h-9 invert opacity-80"
           />
+
           <p className="text-sm">
             Discover the world's most extraordinary places to stay, from
             boutique hotels to luxury villas and private islands.
@@ -39,7 +46,7 @@ const Footer = () => {
           <div className="flex items-center gap-3 mt-4">
             <img
               src={assets.instagramIcon}
-              alt="instargram-icon"
+              alt="instagram-icon"
               className="w-6 cursor-pointer transition-all duration-200 ease-out opacity-80 hover:opacity-100 hover:scale-110 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 rounded"
             />
             <img
@@ -54,104 +61,78 @@ const Footer = () => {
             />
             <img
               src={assets.linkendinIcon}
-              alt="linkend-icon"
+              alt="linkedin-icon"
               className="w-6 cursor-pointer transition-all duration-200 ease-out opacity-80 hover:opacity-100 hover:scale-110 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 rounded"
             />
           </div>
         </div>
 
+        {/* Company */}
         <div>
           <p className="font-playfair text-lg text-gray-800">COMPANY</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <Link to="/about" className={linkClass}>
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Careers
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Press
               </a>
             </li>
+
+            {/* ✅ Blog router-link (yangi component orqali) */}
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
-                Blog
-              </a>
+              <FooterBlog />
             </li>
+
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Partners
               </a>
             </li>
           </ul>
         </div>
 
+        {/* Support */}
         <div>
           <p className="font-playfair text-lg text-gray-800">SUPPORT</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Help Center
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Safety Information
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Cancellation Options
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Contact Us
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-              >
+              <a href="#" className={linkClass}>
                 Accessibility
               </a>
             </li>
           </ul>
         </div>
 
+        {/* Stay Updated */}
         <div className="max-w-80">
           <p className="font-playfair text-lg text-gray-800">STAY UPDATED</p>
           <p className="mt-3 text-sm">
@@ -169,9 +150,7 @@ const Footer = () => {
             <button
               onClick={handleSubscribe}
               className="flex items-center justify-center bg-black h-9 w-9 aspect-square rounded-r cursor-pointer
-              transition-all duration-300 ease-out
-              hover:scale-105
-              active:scale-95"
+              transition-all duration-300 ease-out hover:scale-105 active:scale-95"
             >
               <img
                 src={assets.arrowIcon}
@@ -187,34 +166,26 @@ const Footer = () => {
 
       <div className="flex flex-col md:flex-row gap-2 items-center justify-between py-5">
         <p>© {new Date().getFullYear()} QuickStay. All rights reserved.</p>
+
         <ul className="flex items-center gap-4">
           <li>
-            <a
-              href="#"
-              className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-            >
+            <a href="#" className={linkClass}>
               Privacy
             </a>
           </li>
           <li>
-            <a
-              href="#"
-              className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-            >
+            <a href="#" className={linkClass}>
               Terms
             </a>
           </li>
           <li>
-            <a
-              href="#"
-              className="transition-colors duration-200 hover:text-gray-800 hover:underline underline-offset-4 decoration-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 rounded"
-            >
+            <a href="#" className={linkClass}>
               Sitemap
             </a>
           </li>
         </ul>
       </div>
-    </div>
+    </footer>
   );
 };
 
