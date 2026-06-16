@@ -11,9 +11,7 @@ const MyBookings = () => {
   const fetchUserBookings = async () => {
     try {
       const { data } = await axios.get("/api/bookings/user", {
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
+        headers: { Authorization: `Bearer ${await getToken()}` },
       });
       if (data.success) {
         setBookings(data.bookings);
@@ -30,13 +28,10 @@ const MyBookings = () => {
       const { data } = await axios.post(
         "/api/bookings/stripe-payment",
         { bookingId },
-        {
-          headers: {
-            Authorization: `Bearer ${await getToken()}`,
-          },
-        },
+        { headers: { Authorization: `Bearer ${await getToken()}` } },
       );
       if (data.success) {
+        localStorage.setItem("pendingBookingId", bookingId); // ✅
         window.location.href = data.url;
       } else {
         toast.error(data.message);
@@ -72,31 +67,22 @@ const MyBookings = () => {
             key={booking._id}
             className="grid grid-cols-1 md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 py-6 first:border-t"
           >
-            {/* - - - Hotel Details - - - */}
             <div className="flex flex-col md:flex-row">
               <div className="overflow-hidden rounded">
                 <img
                   src={booking.room.images[0]}
                   alt="hotel-img"
-                  className="md:w-44 rounded object-cover
-                  transition-transform duration-500 ease-out
-                  hover:scale-105 hover:shadow-lg cursor-pointer"
+                  className="md:w-44 rounded object-cover transition-transform duration-500 ease-out hover:scale-105 hover:shadow-lg cursor-pointer"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5 max-md:mt-3 md:ml-4">
-                <p
-                  className="font-playfair text-2xl inline-block
-                  text-gray-900 cursor-pointer
-                  transition-all duration-300
-                  hover:text-orange-600 hover:underline hover:underline-offset-4"
-                >
+                <p className="font-playfair text-2xl inline-block text-gray-900 cursor-pointer transition-all duration-300 hover:text-orange-600 hover:underline hover:underline-offset-4">
                   {booking.hotel.name}{" "}
                   <span className="font-inter text-sm text-gray-500">
                     ({booking.room.roomType})
                   </span>
                 </p>
-
                 <div className="flex items-center gap-1 text-sm text-gray-500">
                   <img src={assets.locationIcon} alt="location-icon" />
                   <span>{booking.hotel.address}</span>
@@ -109,7 +95,6 @@ const MyBookings = () => {
               </div>
             </div>
 
-            {/* - - - Date & Timings - - - */}
             <div className="flex flex-row md:items-center md:gap-12 mt-3 gap-8">
               <div>
                 <p>Check-In:</p>
@@ -117,7 +102,6 @@ const MyBookings = () => {
                   {new Date(booking.checkInDate).toDateString()}
                 </p>
               </div>
-
               <div>
                 <p>Check-Out:</p>
                 <p className="text-gray-500 text-sm">
@@ -126,7 +110,6 @@ const MyBookings = () => {
               </div>
             </div>
 
-            {/* - - - Payment Status - - - */}
             <div className="flex flex-col items-start justify-center pt-3">
               <div className="flex items-center gap-2">
                 <div

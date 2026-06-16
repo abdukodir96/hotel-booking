@@ -3,15 +3,32 @@ import { useAppContext } from "../context/AppContext";
 import { useParams } from "react-router-dom";
 
 const Loader = () => {
-  const { navigate } = useAppContext();
+  const { navigate, axios, getToken } = useAppContext();
   const { nextUrl } = useParams();
 
   useEffect(() => {
-    if (nextUrl) {
+    const verify = async () => {
+      const bookingId = localStorage.getItem("pendingBookingId");
+
+      if (bookingId) {
+        try {
+          await axios.post(
+            "/api/bookings/verify-payment",
+            { bookingId },
+            { headers: { Authorization: `Bearer ${await getToken()}` } },
+          );
+        } catch (e) {
+          console.log("verify error:", e.message);
+        }
+        localStorage.removeItem("pendingBookingId");
+      }
+
       setTimeout(() => {
         navigate(`/${nextUrl}`);
-      }, 8000);
-    }
+      }, 2000);
+    };
+
+    if (nextUrl) verify();
   }, [nextUrl]);
 
   return (
