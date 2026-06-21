@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { assets, facilityIcons, roomCommonData } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import { useClerk } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 
 const StarRating = () => (
@@ -14,7 +15,8 @@ const StarRating = () => (
 
 const RoomDetails = () => {
   const { id } = useParams();
-  const { rooms, getToken, axios, navigate } = useAppContext();
+  const { rooms, user, getToken, axios, navigate } = useAppContext();
+  const { openSignIn } = useClerk();
   const [room, setRoom] = useState(null);
   const [mainImage, setMainImage] = useState(null);
   const [checkInDate, setCheckInDate] = useState(null);
@@ -56,6 +58,10 @@ const RoomDetails = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault();
+      if (!user) {
+        toast.error("Please log in to book a room");
+        return openSignIn();
+      }
       if (!isAvailable) {
         return checkAvailability();
       } else {
