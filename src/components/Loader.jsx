@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "../context/AppContext";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const Loader = () => {
   const { navigate, axios, getToken } = useAppContext();
   const { nextUrl } = useParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const verify = async () => {
       const bookingId = localStorage.getItem("pendingBookingId");
+      const sessionId = searchParams.get("session_id");
 
       if (bookingId) {
         try {
           await axios.post(
             "/api/bookings/verify-payment",
-            { bookingId },
+            { bookingId, sessionId },
             { headers: { Authorization: `Bearer ${await getToken()}` } },
           );
         } catch (e) {
